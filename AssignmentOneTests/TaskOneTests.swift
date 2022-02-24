@@ -16,5 +16,6 @@ class TaskOneTests: XCTestCase {
         let expectedSum = 7
         
         let sum = TaskOne().getSum(list: list)
+        XCTAssertEqual(expectedSum, sum)
     }
 }

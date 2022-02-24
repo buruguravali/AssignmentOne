@@ -8,19 +8,20 @@
 import UIKit
 
 class TaskTwo : NSObject {
-    enum  PasswordError : Error {
-        case number
+    enum  CredentialsError : Error {
+        case usernameError
+        case passwordError
     }
     
     func validateCredentials(username:String, password:String) throws -> Bool
     {
-        if username == "Ravali"
+        if username != "Ravali"
         {
-            return true
+            throw CredentialsError.usernameError
         }
-        if password == "12345"
+        if password != "12345"
         {
-            throw PasswordError.number
+            throw CredentialsError.passwordError
         }
         return true
     }
