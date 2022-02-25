@@ -7,28 +7,38 @@
 
 import XCTest
 @testable import AssignmentOne
-class TaskTwoTests: XCTestCase {
 
+class TaskTwoTests: XCTestCase {
+    
     func testValidateCredentials()
     {
         let username = "Ravali"
         let password = "12345"
         let expectedResult = true
         
-        let credentialsStatus = TaskTwo().validateCredentials(username: username, password: password)
+        let credentialsStatus = try? TaskTwo().validateCredentials(username: username, password: password)
         
         XCTAssertEqual(expectedResult, credentialsStatus)
     }
-
-    func testInValidateCredentials()
+    
+    func testInValiPasswordCredentials()
     {
-        let username = "abcd"
+        let username = "Ravali"
         let password = "123452439405"
-        let expectedResult = false
         
-        let credentialsStatus = TaskTwo().validateCredentials(username: username, password: password)
-        
-        XCTAssertEqual(expectedResult, credentialsStatus)
+        XCTAssertThrowsError(try TaskTwo().validateCredentials(username: username, password: password) ) { error in
+            XCTAssertEqual(error as! CredentialsError, CredentialsError.passwordError)
+        }
     }
-
+    
+    func testInValidUsernameCredentials()
+    {
+        let username = "test"
+        let password = "12345"
+        
+        XCTAssertThrowsError(try TaskTwo().validateCredentials(username: username, password: password) ) { error in
+            XCTAssertEqual(error as! CredentialsError, CredentialsError.usernameError)
+        }
+    }
+    
 }

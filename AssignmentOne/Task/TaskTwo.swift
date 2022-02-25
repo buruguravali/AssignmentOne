@@ -7,11 +7,11 @@
 
 import UIKit
 
+enum  CredentialsError : Error {
+    case usernameError
+    case passwordError
+}
 class TaskTwo : NSObject {
-    enum  CredentialsError : Error {
-        case usernameError
-        case passwordError
-    }
     
     func validateCredentials(username:String, password:String) throws -> Bool
     {
